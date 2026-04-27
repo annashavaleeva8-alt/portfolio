@@ -1045,8 +1045,101 @@ a:hover { color: var(--accent); }
 }
 
 /* ===================================================
-   CONTACT
+   CONTACT (+ sparkles / particles фон)
    =================================================== */
+.contact-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-particles-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.contact-particles-host {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.contact-particles-host canvas {
+  pointer-events: none !important;
+}
+
+/* Тонкие линии как в demo (золото под палитру сайта) */
+.contact-particles-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.contact-particles-lines::before,
+.contact-particles-lines::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 168, 108, 0.55),
+    transparent
+  );
+  top: 12%;
+  box-shadow: 0 0 12px rgba(201, 168, 108, 0.2);
+}
+
+.contact-particles-lines::after {
+  top: 18%;
+  left: 28%;
+  right: 28%;
+  opacity: 0.65;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(220, 196, 154, 0.45),
+    transparent
+  );
+}
+
+/* Мягкие края, чтобы частицы не «рвались» по краям секции */
+.contact-particles-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 85% 70% at 50% 45%,
+    transparent 0%,
+    transparent 35%,
+    rgba(6, 6, 8, 0.35) 75%,
+    rgba(6, 6, 8, 0.92) 100%
+  );
+}
+
+.contact-section .container {
+  position: relative;
+  z-index: 3;
+}
+
+.contact-section .section-title {
+  position: relative;
+  z-index: 3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-particles-wrap {
+    display: none;
+  }
+}
+
 .contact-layout {
   display: grid;
   grid-template-columns: auto 1fr;
