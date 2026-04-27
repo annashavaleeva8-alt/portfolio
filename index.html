@@ -11,7 +11,13 @@
 </head>
 <body>
 
-  <div id="cursor-container" aria-hidden="true"></div>
+  <div id="target-cursor-root" class="target-cursor-wrapper" aria-hidden="true">
+    <div class="target-cursor-dot"></div>
+    <div class="target-cursor-corner corner-tl"></div>
+    <div class="target-cursor-corner corner-tr"></div>
+    <div class="target-cursor-corner corner-br"></div>
+    <div class="target-cursor-corner corner-bl"></div>
+  </div>
 
   <div class="noise-layer" aria-hidden="true"></div>
   <div class="mesh-bg" aria-hidden="true"></div>
@@ -280,7 +286,7 @@
         <h2 class="section-title">Если тебе нужен сайт, который выглядит сильно и ощущается современно — давай соберём</h2>
         <p class="cta-text">Могу помочь с концепцией, структурой, упаковкой и реализацией. От первого вайба до готовой страницы.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="https://t.me/yourname" target="_blank" rel="noopener noreferrer">Написать мне</a>
+          <a class="btn btn-primary" href="https://t.me/Anna_Shavaleeva8" target="_blank" rel="noopener noreferrer">Написать мне</a>
           <a class="btn btn-ghost" href="#projects">Посмотреть работы</a>
         </div>
       </div>
@@ -290,19 +296,9 @@
       <div class="container contact-layout">
         <h2 class="section-title">Контакты</h2>
         <ul class="contact-list">
-          <li><a href="https://t.me/yourname" target="_blank" rel="noopener noreferrer">Telegram: @yourname</a></li>
-          <li><a href="mailto:hello@yourmail.com">Email: hello@yourmail.com</a></li>
-          <li class="contact-socials">
-            <a href="#">Behance</a>
-            <span class="contact-sep">/</span>
-            <a href="#">Dribbble</a>
-            <span class="contact-sep">/</span>
-            <a href="#">GitHub</a>
-            <span class="contact-sep">/</span>
-            <a href="#">Notion</a>
-            <span class="contact-sep">/</span>
-            <a href="#">Instagram</a>
-          </li>
+          <li><a href="https://t.me/Anna_Shavaleeva8" target="_blank" rel="noopener noreferrer">Telegram: @Anna_Shavaleeva8</a></li>
+          <li><a href="mailto:anna.shavaleeva8@gmail.com">Email: anna.shavaleeva8@gmail.com</a></li>
+          <li><a href="https://wa.me/message/OSXHOXW6576KN1" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
         </ul>
       </div>
     </section>
@@ -317,6 +313,8 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="target-cursor.js"></script>
   <script>
     (function () {
       const header = document.getElementById("site-header");
@@ -366,58 +364,6 @@
       document.querySelectorAll(".reveal").forEach(function (el) {
         observer.observe(el);
       });
-
-      /* --- Custom cursor effect --- */
-      var isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
-
-      if (!isTouchDevice) {
-        var squareCount = 5;
-        var squares = [];
-        var cursorContainer = document.getElementById("cursor-container");
-
-        for (var i = 0; i < squareCount; i++) {
-          var sq = document.createElement("div");
-          sq.classList.add("cursor-square");
-          cursorContainer.appendChild(sq);
-          squares.push(sq);
-        }
-
-        var cursorX = 0;
-        var cursorY = 0;
-
-        function updateCursorSquares() {
-          squares.forEach(function (sq, idx) {
-            var offsetX = (idx % 3 - 1) * 10;
-            var offsetY = Math.floor(idx / 3) * 10;
-            sq.style.left = cursorX + offsetX + "px";
-            sq.style.top = cursorY + offsetY + "px";
-          });
-        }
-
-        document.addEventListener("mousemove", function (e) {
-          cursorX = e.clientX;
-          cursorY = e.clientY;
-          updateCursorSquares();
-
-          squares.forEach(function (sq) {
-            if (!sq.classList.contains("visible")) {
-              sq.classList.add("visible");
-            }
-          });
-        });
-
-        document.addEventListener("mouseleave", function () {
-          squares.forEach(function (sq) {
-            sq.classList.remove("visible");
-          });
-        });
-
-        document.addEventListener("mouseenter", function () {
-          squares.forEach(function (sq) {
-            sq.classList.add("visible");
-          });
-        });
-      }
     })();
   </script>
 

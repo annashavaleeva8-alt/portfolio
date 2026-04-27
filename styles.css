@@ -18,6 +18,9 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .target-cursor-wrapper {
+    display: none !important;
+  }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -1095,33 +1098,70 @@ a:hover { color: var(--accent); }
 }
 
 /* ===================================================
-   CUSTOM CURSOR EFFECT
+   TARGET CURSOR (GSAP) — как TargetCursor + mix-blend
    =================================================== */
 @media (pointer: fine) {
-  *, *::before, *::after {
+  html.cursor-gsap-on *,
+  html.cursor-gsap-on *::before,
+  html.cursor-gsap-on *::after {
     cursor: none !important;
   }
 }
 
-#cursor-container {
+.target-cursor-wrapper {
   position: fixed;
   top: 0;
   left: 0;
+  width: 0;
+  height: 0;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 10000;
+  mix-blend-mode: difference;
+  will-change: transform;
 }
 
-.cursor-square {
+.target-cursor-dot {
   position: absolute;
-  width: 5px;
-  height: 5px;
-  background-color: rgba(201, 168, 108, 0.35);
-  box-shadow: 0 0 6px rgba(201, 168, 108, 0.25);
-  opacity: 0;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
   transform: translate(-50%, -50%);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  will-change: transform;
 }
 
-.cursor-square.visible {
-  opacity: 1;
+.target-cursor-corner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border: 3px solid #fff;
+  will-change: transform;
+}
+
+.corner-tl {
+  transform: translate(-150%, -150%);
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-tr {
+  transform: translate(50%, -150%);
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner-br {
+  transform: translate(50%, 50%);
+  border-left: none;
+  border-top: none;
+}
+
+.corner-bl {
+  transform: translate(-150%, 50%);
+  border-right: none;
+  border-top: none;
 }
